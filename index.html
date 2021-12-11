@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="header">
+      <img src="./images/Vector.png" alt="Изображение логотипа в шапке" class="header__logo">
+      <img src="./images/Line.jpg" alt="Линия" class="header__line">
+    </header>
+
+    <main class="content">
+
+      <header class="profile">
+        <div class="profile__card">
+          <img src="./images/image.jpg" alt="Изображение логотипа в шапке" class="profile__avatar">
+          <div class="profile__info">
+            <p class="profile__name">Жак-Ив Кусто</p>
+            <p class="profile__job">Исследователь океана</p>
+          </div>
+          <button class="profile__edit-button"><img src="./images/EditButton.png" alt="Кнопка поменять профиль" class="profile__button"></button>
+        </div>  
+        <button class="Add-button"><img src="./images/AddButton.png" alt="Кнопка добавить" class="profile-button"></button>
+      </header>
+
+      <div class="elements">
+        <div class="element">
+          <img src="../mesto/images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="element__image">
+          <h2 class="element__title">Карачаевск</h2>
+        </div>
+        <div class="element">
+          <img src="../mesto/images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус" class="element__image">
+          <h2 class="element__title">Гора Эльбрус</h2>
+        </div>
+        <div class="element">
+          <img src="../mesto/images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай" class="element__image">
+          <h2 class="element__title">Домбай</h2>
+        </div>
+        <div class="element">
+          <img src="../mesto/images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус" class="element__image">
+          <h2 class="element__title">Гора Эльбрус</h2>
+        </div>
+        <div class="element">
+          <img src="../mesto/images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай" class="element__image">
+          <h2 class="element__title">Домбай</h2>
+        </div>
+        <div class="element">
+          <img src="../mesto/images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="element__image">
+          <h2 class="element__title">Карачаевск</h2>
+        </div>
+      </div>
+        
+    </main>
+
+    <footer class="footer">
+      <p class="footer__author">&COPY;2020 Mesto Russia</p>
+    </footer>
+  </div>
+  <section class="popup">
+    <div class="popup__container">
+      <button class ="popup__close"></button>
+      <div class = "popup__text-container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <p class="popup__text">Жак-Ив Кусто</p>
+        <p class="popup__text">Исследователь океана</p>
+      </div>
+      <button class="popup__save">Сохранить</button>
+    </div>
+  </section>
+
+  <script src="./scripts/index.js"></script>
+</body>
+
+</html>

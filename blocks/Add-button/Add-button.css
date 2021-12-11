@@ -1,0 +1,8 @@
+.Add-button {
+  width: 150px;
+  height: 50px;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
