@@ -1,0 +1,9 @@
+.group {
+  height: 79px;
+  width: 282px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}

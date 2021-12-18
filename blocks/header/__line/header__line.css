@@ -1,12 +1,10 @@
-.footer {
+.header__line {
   width: 880px;
-
 }
 
 @media screen and (max-width:920px) {
 
-  .footer {
-    width: 282px;
-
+  .header__line {
+    width: 320px;
   }
 }

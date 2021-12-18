@@ -5,4 +5,20 @@
   margin: 0;
   padding: 0;
   cursor: pointer;
+  border: none;
+  background-image: url(../../images/AddButton.png);
+}
+
+
+.Add-button:hover {
+  opacity: 60%;
+}
+@media screen and (max-width:920px) {
+  .Add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 282px;
+    background-image: url(../../images/AddButton_mobile.png);
+  }
 }

@@ -1,5 +1,4 @@
 .popup {
-  
   position: fixed;
   top: 0;
   right: 0;
@@ -10,4 +9,5 @@
   align-items: center;
   justify-content: center;
   display: none;
+  border-style: none;
 }

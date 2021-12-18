@@ -3,5 +3,22 @@
   margin: 0;
   padding: 0;
   cursor: pointer;
+  position: absolute;
+  top: 45px;
+  left: 466px;
 }
 
+
+.profile__edit-button:hover {
+   opacity: 60%;
+ }
+
+@media screen and (max-width:920px) {
+
+  .profile__edit-button {
+
+    top: 149px;
+    left: 260px;
+
+  }
+}

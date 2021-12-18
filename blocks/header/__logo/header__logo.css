@@ -1,6 +1,15 @@
 .header__logo {
-    height: 33px;
-    width: 142px;
-    justify-self: start;
-    justify-content: flex-start;
+  height: 33px;
+  width: 142px;
+  justify-self: start;
+  justify-content: flex-start;
+  margin-bottom: 41px;
+}
+
+@media screen and (max-width:920px) {
+
+  .header__logo {
+    height: 24px;
+    width: 103px;
+  }
 }
