@@ -2,6 +2,7 @@ const popupOpenButton = document.querySelector( '.profile__edit-button');
 const popupCloseButton = document.querySelector('.popup__close');
 const popupSaveButton = document.querySelector('.button-save');
 const popup = document.querySelector( '.popup');
+const popupForm = document.querySelector( '.popup2');
 
 
 function openPopup() {
@@ -33,14 +34,18 @@ function savePopup() {
     popup.classList.remove('popup_opened');
 }
 
-
 popupOpenButton.addEventListener( 'click', openPopup);
 popupCloseButton.addEventListener ( 'click' , closePopup);
 popupSaveButton.addEventListener ( 'click' , savePopup);
 
+const popupAddButton = document.querySelector( '.Add-button');
 
 
 
+function openPopup2() {
+    popupForm.classList.add( 'popup2_opened');
 
+}
 
+popupAddButton.addEventListener( 'click', openPopup2);
 
