@@ -6,9 +6,7 @@
 
 @media screen and (max-width:920px) {
   .profile__edit-info {
-    display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
   }
 }

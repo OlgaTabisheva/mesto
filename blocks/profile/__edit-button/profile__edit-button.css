@@ -3,7 +3,12 @@
   margin: 20px 0 0 0;
   padding: 0;
   cursor: pointer;
-
+  border: none;
+  outline: none;
+  background-image: url(../../../images/EditButton.svg);
+  width: 10px;
+  height: 10px;
+  background-position: center;
 }
 
 
@@ -11,3 +16,8 @@
    opacity: 60%;
  }
 
+@media screen and (max-width:920px) {
+  .profile__edit-button {
+    margin: 37px 0 0 0;
+  }
+}

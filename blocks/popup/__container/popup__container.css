@@ -1,8 +1,8 @@
-.popup__container{
+.popup__container {
   font-family: "Inter", 'Helvetica Neue', Arial, sans-serif;
-  background: #ffff;
-  width: 430px;
-  height: 330px;
+  background: #ffffff;
+  width: 100%;
+  max-width: 430px;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   display: flex;
@@ -12,12 +12,11 @@
   position: relative;
 }
 
-@media screen and (max-width:920px) {
+@media screen and (max-width: 920px) {
 
   .popup__container {
 
     width: 282px;
-    height: 322px;
 
   }
 }

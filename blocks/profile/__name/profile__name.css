@@ -17,6 +17,8 @@
     font-size: 27px;
     line-height: 32.68px;
     width: 189px;
+    display: flex;
+    justify-content: space-around;
 
   }
 }
