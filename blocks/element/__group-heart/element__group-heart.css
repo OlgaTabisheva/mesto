@@ -4,6 +4,7 @@
   margin: 0 20px 0 0;
   background-image: url(../../../images/heart.svg);
   border: hidden;
+  background-color: white;
 }
 
 .element__group-heart:hover {
