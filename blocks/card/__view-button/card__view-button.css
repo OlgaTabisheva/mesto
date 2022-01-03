@@ -1,0 +1,7 @@
+.card__view-button{
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: inherit;
+}
