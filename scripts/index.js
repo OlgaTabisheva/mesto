@@ -8,8 +8,7 @@ const editForm = editModal.querySelector('.popup__form');
 const addCardForm = addCardModal.querySelector('.popup__form');
 
 
-
-addCardForm.addEventListener('submit', (event) =>{
+addCardForm.addEventListener('submit', (event) => {
   event.preventDefault()
   const nameValue = inputCardName.value;
   const linkValue = inputLink.value;
@@ -23,7 +22,7 @@ addCardForm.addEventListener('submit', (event) =>{
   toogleModal(addCardModal);
 });
 
-editForm.addEventListener('submit', (event) =>{
+editForm.addEventListener('submit', (event) => {
   event.preventDefault()
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
@@ -33,25 +32,26 @@ editForm.addEventListener('submit', (event) =>{
 
 
 let profileName = document.querySelector('.profile__name');
- let profileJob = document.querySelector('.profile__job');
+let profileJob = document.querySelector('.profile__job');
 
- //инпуты
- let inputName = document.querySelector('.popup__input_type_name');
- let inputJob = document.querySelector('.popup__input_type_job');
+//инпуты
+let inputName = document.querySelector('.popup__input_type_name');
+let inputJob = document.querySelector('.popup__input_type_job');
 const inputCardName = document.querySelector(".popup__input_type_card-name");
 const inputLink = document.querySelector(".popup__input_card-link");
 
 
-function toogleModal(modal){
+function toogleModal(modal) {
 
   modal.classList.toggle('popup_opened')
 
 }
+
 function openPopupEdit() {
-   editModal.classList.add('popup_opened');
+  editModal.classList.add('popup_opened');
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
- }
+}
 
 
 editProfileButton.addEventListener('click', () => openPopupEdit())
@@ -91,20 +91,19 @@ const initialCards = [
 ];
 
 const list = document.querySelector(".elements");
-const cardTemplate = document.querySelector('.card__template').content;
+const cardTemplate = document.querySelector('.card-template').content;
 
 //удаление карточки
-function deleteHandler(e){
+function deleteHandler(e) {
   e.target.closest('.element').remove()
 }
 
 
-
-function createCard (cardData){
+function createCard(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector('.element__image');
-  const cardTitle= cardElement.querySelector('.element__group-title');
-  const deleteButton= cardElement.querySelector('.card__delete-button');
+  const cardTitle = cardElement.querySelector('.element__group-title');
+  const deleteButton = cardElement.querySelector('.element__delete-button');
   const likeButton = cardElement.querySelector('.element__group-heart');
 
 
@@ -115,28 +114,31 @@ function createCard (cardData){
   deleteButton.addEventListener("click", deleteHandler)
   likeButton.addEventListener("click", likeClickHandler)
 
-  function likeClickHandler(){
+  function likeClickHandler() {
     likeButton.classList.toggle('element__group-heart_active');
   }
 
   list.prepend(cardElement);
+
   function openPopup(viewCardModal) {
     viewCardModal.classList.add('popup_opened');
-    document.querySelector('.popup__place-name').textContent= cardTitle.textContent;
+    document.querySelector('.popup__place-name').textContent = cardTitle.textContent;
     document.querySelector('.popup__image-link').src = cardImage.src;
   }
+
 // Функция закрытия viewCardModal реализована таким образом, т.к. внешний toogleModal на закрытие не работает.
-   function closePopup(viewCardModal) {
-     viewCardModal.classList.remove('popup_opened');
- }
+  function closePopup(viewCardModal) {
+    viewCardModal.classList.remove('popup_opened');
+  }
 
   const viewCardModal = document.querySelector('.popup_type-image-container');
-  const viewCardButton = document.querySelector('.card__view-button');
+  const viewCardButton = document.querySelector('.element__view-button');
   const CloseViewCardModal = viewCardModal.querySelector('.popup__close');
 
   viewCardButton.addEventListener('click', () => openPopup(viewCardModal))
   CloseViewCardModal.addEventListener('click', () => closePopup(viewCardModal))
 }
+
 initialCards.forEach(createCard);
 
 
