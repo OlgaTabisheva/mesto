@@ -1,4 +1,4 @@
-.popup__image-link{
+.popup__image-link {
   max-width: 75vw;
   max-height: 75vh;
 
@@ -6,7 +6,7 @@
 
 @media screen and (max-width: 920px) {
 
-  .popup__image-link{
+  .popup__image-link {
 
     max-width: 240px;
 

@@ -4,7 +4,7 @@
   align-items: flex-start;
 }
 
-@media screen and (max-width:920px) {
+@media screen and (max-width: 920px) {
   .profile__edit-info {
     justify-content: center;
     align-items: flex-start;
