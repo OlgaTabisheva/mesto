@@ -5,7 +5,7 @@
   background-image: url(../../../images/heart.svg);
   border: hidden;
   background-color: white;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .element__group-heart:hover {
