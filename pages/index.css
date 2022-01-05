@@ -36,5 +36,5 @@
 @import url(../blocks/popup/__image-link/popup__image-link.css);
 @import url(../blocks/popup/__place-name/popup__place-name.css);
 @import url(../blocks/popup/__container-image/popup__container-image.css);
-@import url(../blocks/popup/_type-image-container/popup_type-image-container.css);
+@import url(../blocks/popup/_type/popup_type_image-container.css);
 

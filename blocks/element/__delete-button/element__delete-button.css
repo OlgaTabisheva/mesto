@@ -6,4 +6,5 @@
   border: none;
   background-image: url(../../../images/can.svg);
   margin: 20px 0 0 244px;
+  cursor: pointer
 }

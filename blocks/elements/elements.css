@@ -2,8 +2,8 @@
   margin-top: 51px;
   width: 880px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(282px, 1fr));
   gap: 17px 15px;
 }
 
@@ -12,8 +12,7 @@
   .elements {
     margin-top: 36px;
     width: 320px;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+
     gap: 20px;
     align-items: center;
     justify-items: center;
