@@ -80,7 +80,7 @@ function createCard(cardData) {
   const deleteButton = cardElement.querySelector('.element__delete-button');
   const likeButton = cardElement.querySelector('.element__group-heart');
 
-  function openPopupImage(viewCardModal){
+  function openPopupImage(viewCardModal) {
     document.querySelector('.popup__place-name').textContent = cardTitle.textContent;
     document.querySelector('.popup__image-link').src = cardImage.src;
     openPopup(viewCardModal)
@@ -93,16 +93,17 @@ function createCard(cardData) {
   function likeClickHandler() {
     likeButton.classList.toggle('element__group-heart_active');
   }
+
   cardsList.prepend(cardElement);
   return cardElement;
 
 }
 
-function renderCard(cardData){
-    const cardElement = createCard(cardData);
-    cardsList.prepend(cardElement);
+function renderCard(cardData) {
+  const cardElement = createCard(cardData);
+  cardsList.prepend(cardElement);
 
-   }
+}
 
 
 initialCards.forEach(renderCard);
