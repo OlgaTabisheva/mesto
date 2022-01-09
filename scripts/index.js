@@ -18,14 +18,14 @@ addCardForm.addEventListener('submit', (event) => {
     name: nameValue,
     link: linkValue
   })
-  closePopup(addCardModal);
+  closePopupKeyEcs(event, addCardModal);
 });
 
 editForm.addEventListener('submit', (event) => {
   event.preventDefault()
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
-  closePopup(editModal);
+  closePopupKeyEcs(event,editModal);
 
 });
 
@@ -43,15 +43,29 @@ function openPopup(modal) {
   modal.classList.add('popup_opened');
 }
 
-function closePopup(modal) {
-  modal.classList.remove('popup_opened');
-}
+// function closePopup(modal) {
+//   modal.classList.remove('popup_opened');
+// }
 
-function closePopupOnOverlayClick(event, modal) {
+// function closePopupOnOverlayClick(event, modal) {
+//   if (event.target === event.currentTarget) {
+//     modal.classList.remove('popup_opened');
+//   }
+// }
+
+function closePopupKeyEcs(event, modal) {
+  if (event.keyCode && event.keyCode === 27 ) {
+    modal.classList.remove('popup_opened');
+    return;
+  }
+
   if (event.target === event.currentTarget) {
     modal.classList.remove('popup_opened');
+    return;
   }
 }
+
+
 
 function openPopupEdit(editModal) {
   inputName.value = profileName.textContent;
@@ -60,14 +74,16 @@ function openPopupEdit(editModal) {
 }
 
 editProfileButton.addEventListener('click', () => openPopupEdit(editModal))
-editModal.addEventListener('click', (event) => closePopupOnOverlayClick(event, editModal))
-closeEditModal.addEventListener('click', () => closePopup(editModal))
+editModal.addEventListener('click', (event) => closePopupKeyEcs(event, editModal))
+editModal.addEventListener('keydown', (event) => closePopupKeyEcs(event, editModal))
+closeEditModal.addEventListener('click', (event) => closePopupKeyEcs(event,editModal))
 
 addCardButton.addEventListener('click', () => openPopup(addCardModal))
-closeAddCardModalButton.addEventListener('click', () => closePopup(addCardModal))
-addCardModal.addEventListener('click', (event) => closePopupOnOverlayClick(event, addCardModal))
-CloseViewCardModal.addEventListener('click', () => closePopup(viewCardModal))
-viewCardModal.addEventListener('click', (event) => closePopupOnOverlayClick(event, viewCardModal))
+closeAddCardModalButton.addEventListener('click', (event) => closePopupKeyEcs(event,addCardModal))
+addCardModal.addEventListener('click', (event) => closePopupKeyEcs(event, addCardModal))
+addCardModal.addEventListener('keydown', (event) => closePopupKeyEcs(event, addCardModal))
+CloseViewCardModal.addEventListener('click', (event) => closePopupKeyEcs(event,viewCardModal))
+viewCardModal.addEventListener('click', (event) => closePopupKeyEcs(event, viewCardModal))
 
 const cardsList = document.querySelector(".elements");
 const cardTemplate = document.querySelector('.card-template').content;
