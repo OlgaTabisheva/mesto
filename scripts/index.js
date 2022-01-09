@@ -47,6 +47,12 @@ function closePopup(modal) {
   modal.classList.remove('popup_opened');
 }
 
+function closePopupOnOverlayClick(event, modal) {
+  if (event.target === event.currentTarget) {
+    modal.classList.remove('popup_opened');
+  }
+}
+
 function openPopupEdit(editModal) {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
@@ -54,12 +60,14 @@ function openPopupEdit(editModal) {
 }
 
 editProfileButton.addEventListener('click', () => openPopupEdit(editModal))
+editModal.addEventListener('click', (event) => closePopupOnOverlayClick(event, editModal))
 closeEditModal.addEventListener('click', () => closePopup(editModal))
 
 addCardButton.addEventListener('click', () => openPopup(addCardModal))
 closeAddCardModalButton.addEventListener('click', () => closePopup(addCardModal))
+addCardModal.addEventListener('click', (event) => closePopupOnOverlayClick(event, addCardModal))
 CloseViewCardModal.addEventListener('click', () => closePopup(viewCardModal))
-
+viewCardModal.addEventListener('click', (event) => closePopupOnOverlayClick(event, viewCardModal))
 
 const cardsList = document.querySelector(".elements");
 const cardTemplate = document.querySelector('.card-template').content;
