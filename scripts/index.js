@@ -17,7 +17,9 @@ addCardForm.addEventListener('submit', (event) => {
   renderCard({
     name: nameValue,
     link: linkValue
+
   })
+  console.log(name)
   closePopupKeyEcs(event, addCardModal);
 });
 
@@ -26,7 +28,6 @@ editForm.addEventListener('submit', (event) => {
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
   closePopupKeyEcs(event,editModal);
-
 });
 
 
@@ -40,18 +41,10 @@ const inputCardName = document.querySelector(".popup__input_type_card-name");
 const inputLink = document.querySelector(".popup__input_card-link");
 
 function openPopup(modal) {
+  document.addEventListener('keydown', (event) => closePopupKeyEcs(event, modal))
+
   modal.classList.add('popup_opened');
 }
-
-// function closePopup(modal) {
-//   modal.classList.remove('popup_opened');
-// }
-
-// function closePopupOnOverlayClick(event, modal) {
-//   if (event.target === event.currentTarget) {
-//     modal.classList.remove('popup_opened');
-//   }
-// }
 
 function closePopupKeyEcs(event, modal) {
   if (event.keyCode && event.keyCode === 27 ) {
@@ -63,25 +56,21 @@ function closePopupKeyEcs(event, modal) {
     modal.classList.remove('popup_opened');
     return;
   }
+  document.removeEventListener('keydown', (event) => closePopupKeyEcs(event, modal))
 }
-
-
 
 function openPopupEdit(editModal) {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
   openPopup(editModal);
 }
-
+//слушатели
 editProfileButton.addEventListener('click', () => openPopupEdit(editModal))
 editModal.addEventListener('click', (event) => closePopupKeyEcs(event, editModal))
-editModal.addEventListener('keydown', (event) => closePopupKeyEcs(event, editModal))
 closeEditModal.addEventListener('click', (event) => closePopupKeyEcs(event,editModal))
-
 addCardButton.addEventListener('click', () => openPopup(addCardModal))
 closeAddCardModalButton.addEventListener('click', (event) => closePopupKeyEcs(event,addCardModal))
 addCardModal.addEventListener('click', (event) => closePopupKeyEcs(event, addCardModal))
-addCardModal.addEventListener('keydown', (event) => closePopupKeyEcs(event, addCardModal))
 CloseViewCardModal.addEventListener('click', (event) => closePopupKeyEcs(event,viewCardModal))
 viewCardModal.addEventListener('click', (event) => closePopupKeyEcs(event, viewCardModal))
 
@@ -132,4 +121,10 @@ function renderCard(cardData) {
 
 initialCards.forEach(renderCard);
 
+
+
+editForm.addEventListener('submit', function (evt) {
+  // Отменим стандартное поведение
+  evt.preventDefault();
+});
 
