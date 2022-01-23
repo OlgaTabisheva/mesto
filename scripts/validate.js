@@ -1,6 +1,5 @@
 function submitForm(event) {
   event.preventDefault();
-  console.log("submit form");
 }
 function showError(input, errorContainer, { inputErrorClass, errorVisibleClass }) {
   input.classList.add(inputErrorClass);
@@ -43,7 +42,6 @@ function enableValidation({ formSelector, inputSelector, ...rest}) {
 
   forms.forEach(form => {
     form.addEventListener("submit", submitForm);
-    console.log(form.elements);
 
     const inputs = form .querySelectorAll(inputSelector);
 
