@@ -55,13 +55,3 @@ function enableValidation({ formSelector, inputSelector, ...rest}) {
 }
 
 
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  errorSelector: ".error-message",
-  buttonSelector: ".popup__button-save",
-  inputErrorClass: "popup__input-error",
-  errorVisibleClass: "error-message_visible",
-  inactiveButtonClass: "popup__button-save_disabled"
-
-});
