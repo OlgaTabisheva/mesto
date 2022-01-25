@@ -50,8 +50,6 @@ const inputLink = document.querySelector(".popup__input_card-link");
 function openPopup(modal) {
   document.addEventListener('keydown', closeByEscape)
   modal.classList.add('popup_opened');
-
-  document.addEventListener('click', closePopupOverlay)
 }
 
 function closeByEscape(evt) {
@@ -63,11 +61,12 @@ function closeByEscape(evt) {
 
 function closePopup(modal) {
   modal.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 function closePopupOverlay(event){
   if (event.target === event.currentTarget) {
-    const openedPopup = document.querySelector('.popup_opened')
+    const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
     return;
   }
@@ -103,6 +102,7 @@ function createCard(cardData) {
   const viewCardButton = cardElement.querySelector('.element__view-button');
   cardTitle.textContent = cardData.name;
   cardImage.src = `${cardData.link}`;
+  cardImage.alt = cardData.name;
 
   const deleteButton = cardElement.querySelector('.element__delete-button');
   const likeButton = cardElement.querySelector('.element__group-heart');
@@ -110,6 +110,7 @@ function createCard(cardData) {
   function openPopupImage(viewCardModal) {
     describePlace.textContent = cardTitle.textContent;
     describeLink.src = cardImage.src;
+    describeLink.alt = cardData.name;
     openPopup(viewCardModal)
   }
 
