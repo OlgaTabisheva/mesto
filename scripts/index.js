@@ -1,13 +1,10 @@
 const editModal = document.querySelector(".popup_type_edit");
 const addCardModal = document.querySelector(".popup_type_add-card");
-const closeAddCardModalButton = addCardModal.querySelector('.popup__close');
-const closeEditModal = editModal.querySelector('.popup__close');
 const editProfileButton = document.querySelector('.profile__edit-button');
 const addCardButton = document.querySelector('.profile__add-button');
 const editForm = editModal.querySelector('.popup__form');
 const addCardForm = addCardModal.querySelector('.popup__form');
 const viewCardModal = document.querySelector('.popup_type_image-container');
-const CloseViewCardModal = viewCardModal.querySelector('.popup__close');
 const describePlace = document.querySelector('.popup__place-name')
 const describeLink = document.querySelector('.popup__image-link')
 
@@ -64,28 +61,29 @@ function closePopup(modal) {
   document.removeEventListener('keydown', closeByEscape);
 }
 
-function closePopupOverlay(event){
-  if (event.target === event.currentTarget) {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-    return;
-  }
-}
 function openPopupEdit( editModal) {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
   openPopup(editModal);
 }
 
+const popups = document.querySelectorAll('.popup')
+//обьединенная функция закрытия по крестику и оверлею.
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup)
+    }
+    if (evt.target.classList.contains('popup__close')) {
+      closePopup(popup)
+    }
+  })
+})
+
 //слушатели
 editProfileButton.addEventListener('click', () => openPopupEdit(editModal))
-editModal.addEventListener('click', (event) => closePopupOverlay(event, editModal))
-closeEditModal.addEventListener('click', () => closePopup(editModal))
 addCardButton.addEventListener('click', () => openPopup(addCardModal))
-closeAddCardModalButton.addEventListener('click', () => closePopup(addCardModal))
-addCardModal.addEventListener('click', (event) => closePopupOverlay(event, addCardModal))
-CloseViewCardModal.addEventListener('click', () => closePopup(viewCardModal))
-viewCardModal.addEventListener('click', (event) => closePopupOverlay(event, viewCardModal))
+
 
 const cardsList = document.querySelector(".elements");
 const cardTemplate = document.querySelector('.card-template').content;
