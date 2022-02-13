@@ -58,10 +58,10 @@ editForm.addEventListener('submit', (event) => {
   disableButton(editForm);
 });
 
-function disableButton(form){
+function disableButton(form) {
   const button = form.querySelector(".popup__button-save");
   button.classList.add("popup__button-save_disabled")
-  button.setAttribute("disabled",'')
+  button.setAttribute("disabled", '')
 }
 
 const profileName = document.querySelector('.profile__name');
@@ -90,7 +90,7 @@ function closePopup(modal) {
   document.removeEventListener('keydown', closeByEscape);
 }
 
-function openPopupEdit( editModal) {
+function openPopupEdit(editModal) {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
   openPopup(editModal);
@@ -114,18 +114,15 @@ editProfileButton.addEventListener('click', () => openPopupEdit(editModal))
 addCardButton.addEventListener('click', () => openPopup(addCardModal))
 
 const cardsList = document.querySelector(".elements");
- const cardTemplateSelector = '.card-template'
- const cardTemplate = document.querySelector('.card-template').content;
+const cardTemplateSelector = '.card-template'
 
 
-
-function renderCard(data, wrap) {
-  const card = new Card(data, cardTemplateSelector )
+function renderCard(data) {
+  const card = new Card(data, cardTemplateSelector)
   const cardElement = card.createCard()
   cardsList.prepend(cardElement);
 
 }
-
 
 
 const config = {
@@ -141,7 +138,7 @@ const config = {
 
 initialCards.forEach(renderCard);
 
-const editFormValidator = new FormValidator(config,editForm)
-const addCardFormValidator = new FormValidator(config,addCardForm)
+const editFormValidator = new FormValidator(config, editForm)
+const addCardFormValidator = new FormValidator(config, addCardForm)
 editFormValidator.enableValidation()
 addCardFormValidator.enableValidation()
