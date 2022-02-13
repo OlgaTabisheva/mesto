@@ -1,3 +1,7 @@
+
+import {FormValidator} from './validate.js'
+import {initialCards} from './initialArray.js'
+
 const editModal = document.querySelector(".popup_type_edit");
 const addCardModal = document.querySelector(".popup_type_add-card");
 const editProfileButton = document.querySelector('.profile__edit-button');
@@ -7,7 +11,6 @@ const addCardForm = addCardModal.querySelector('.popup__form');
 const viewCardModal = document.querySelector('.popup_type_image-container');
 const describePlace = document.querySelector('.popup__place-name')
 const describeLink = document.querySelector('.popup__image-link')
-
 
 addCardForm.addEventListener('submit', (event) => {
   event.preventDefault()
@@ -129,9 +132,9 @@ function renderCard(cardData) {
 
 }
 
-initialCards.forEach(renderCard);
 
-enableValidation({
+
+const config = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   errorSelector: ".error-message",
@@ -140,4 +143,11 @@ enableValidation({
   errorVisibleClass: "error-message_visible",
   inactiveButtonClass: "popup__button-save_disabled"
 
-});
+}
+
+initialCards.forEach(renderCard);
+
+const editFormValidator = new FormValidator(config,editForm)
+const addCardFormValidator = new FormValidator(config,addCardForm)
+editFormValidator.enableValidation()
+addCardFormValidator.enableValidation()
