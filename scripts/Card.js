@@ -1,13 +1,10 @@
-import {openPopup, viewCardModal, describePlace, describeLink} from './index.js'
+import {openPopup, viewCardModal, describePlace, describeLink} from './utils.js'
 
 export class Card {
   constructor(data, cardTemplateSelector) {
     this._data = data
-    this._template = document.querySelector(cardTemplateSelector).content
-  }
+    this._template= document.querySelector(cardTemplateSelector).content.querySelector('.element')
 
-  _deleteHandler(e) {
-    e.target.closest('.element').remove()
   }
 
   _openPopupImage(viewCardModal) {
@@ -18,7 +15,7 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._deleteButton.addEventListener("click", this._deleteHandler)
+    this._deleteButton.addEventListener("click",  () =>  this._cardElement.remove())
     this._likeButton.addEventListener("click", this._likeClickHandler)
     this._viewCardButton.addEventListener('click', () => this._openPopupImage(viewCardModal))
 
@@ -29,6 +26,9 @@ export class Card {
   }
 
   createCard() {
+
+    this._element= this._template.querySelector('.element')
+
     this._cardElement = this._template.cloneNode(true);
     this._cardImage = this._cardElement.querySelector('.element__image');
     this._cardTitle = this._cardElement.querySelector('.element__group-title');

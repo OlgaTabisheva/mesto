@@ -1,32 +1,8 @@
 import {Card} from './Card.js'
 import {FormValidator} from './FormValidator.js'
+import {openPopup, closePopup} from './utils.js'
+import {initialCards} from './initialCards.js'
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Санкт-Петербург',
-    link: 'https://images.unsplash.com/photo-1630354102354-2471c8851e60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 const editModal = document.querySelector(".popup_type_edit");
 const addCardModal = document.querySelector(".popup_type_add-card");
@@ -34,21 +10,20 @@ const editProfileButton = document.querySelector('.profile__edit-button');
 const addCardButton = document.querySelector('.profile__add-button');
 const editForm = editModal.querySelector('.popup__form');
 const addCardForm = addCardModal.querySelector('.popup__form');
-export const viewCardModal = document.querySelector('.popup_type_image-container');
-export const describePlace = document.querySelector('.popup__place-name')
-export const describeLink = document.querySelector('.popup__image-link')
+
 
 addCardForm.addEventListener('submit', (event) => {
   event.preventDefault()
   const nameValue = inputCardName.value;
   const linkValue = inputLink.value;
-  document.placeInputForm.reset();
+  addCardForm.reset();
   renderCard({
     name: nameValue,
     link: linkValue
 
   })
   disableButton(addCardForm);
+  closePopup(addCardModal);
 });
 
 editForm.addEventListener('submit', (event) => {
@@ -56,6 +31,7 @@ editForm.addEventListener('submit', (event) => {
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
   disableButton(editForm);
+  closePopup(editModal)
 });
 
 function disableButton(form) {
@@ -73,22 +49,9 @@ const inputJob = document.querySelector('.popup__input_type_job');
 const inputCardName = document.querySelector(".popup__input_type_card-name");
 const inputLink = document.querySelector(".popup__input_card-link");
 
-export function openPopup(modal) {
-  document.addEventListener('keydown', closeByEscape)
-  modal.classList.add('popup_opened');
-}
 
-function closeByEscape(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened')
-    closePopup(openedPopup)
-  }
-}
 
-function closePopup(modal) {
-  modal.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEscape);
-}
+
 
 function openPopupEdit(editModal) {
   inputName.value = profileName.textContent;
