@@ -1,6 +1,5 @@
 .page {
   background-color: black;
-  bgcolor: black;
   display: grid;
   justify-content: center;
 }
