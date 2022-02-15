@@ -13,9 +13,11 @@ export class Card {
     describeLink.alt = this._data.name;
     openPopup(viewCardModal)
   }
-
-  _setEventListeners() {
-    this._deleteButton.addEventListener("click",  () =>  this._cardElement.remove())
+  _deleteHandler() {
+    this._cardElement.remove()
+  }
+    _setEventListeners() {
+    this._deleteButton.addEventListener("click",  () => this._deleteHandler()  )
     this._likeButton.addEventListener("click", this._likeClickHandler)
     this._viewCardButton.addEventListener('click', () => this._openPopupImage(viewCardModal))
 

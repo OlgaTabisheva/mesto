@@ -5,7 +5,8 @@ export class FormValidator {
     this._inputErrorClass = settings.inputErrorClass
     this._errorVisibleClass =settings.errorVisibleClass
     this._inactiveButtonClass =settings.inactiveButtonClass
-    this._buttonSelector =settings.buttonSelector
+    this._submitButton = form.querySelector(settings.buttonSelector)
+    this._inputList = form.querySelectorAll(this._settings.inputSelector)
   }
 
   _showError(input, errorContainer) {
@@ -21,7 +22,7 @@ export class FormValidator {
   }
 
   _toggleButton() {
-    const button = this._form.querySelector(this._buttonSelector);
+    const button = this._submitButton;
     const isFormValid = this._form.checkValidity();
 
     if (isFormValid) {
@@ -50,7 +51,7 @@ export class FormValidator {
 
   enableValidation() {
     this._form.addEventListener("submit", this._submitForm);
-    const inputs = this._form.querySelectorAll(this._settings.inputSelector);
+    const inputs = this._inputList;
     inputs.forEach(input => {
       input.addEventListener("input", () => {
         this._validateInput(input);
