@@ -22,15 +22,14 @@ export class FormValidator {
   }
 
   _toggleButton() {
-    const button = this._submitButton;
     const isFormValid = this._form.checkValidity();
 
     if (isFormValid) {
-      button.classList.remove(this._inactiveButtonClass)
-      button.removeAttribute("disabled")
+      this._submitButton.classList.remove(this._inactiveButtonClass)
+      this._submitButton.removeAttribute("disabled")
     } else {
-      button.classList.add(this._inactiveButtonClass)
-      button.setAttribute("disabled", '')
+      this._submitButton.classList.add(this._inactiveButtonClass)
+      this._submitButton.setAttribute("disabled", '')
     }
 
   }
@@ -51,8 +50,7 @@ export class FormValidator {
 
   enableValidation() {
     this._form.addEventListener("submit", this._submitForm);
-    const inputs = this._inputList;
-    inputs.forEach(input => {
+    this._inputList.forEach(input => {
       input.addEventListener("input", () => {
         this._validateInput(input);
       });
