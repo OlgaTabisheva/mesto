@@ -1,4 +1,4 @@
-import {openPopup, viewCardModal, describePlace, describeLink} from './utils.js'
+import {openPopup, viewCardModal, describePlace, describeLink} from '../../src/utils/utils'
 
 export class Card {
   constructor(data, cardTemplateSelector) {

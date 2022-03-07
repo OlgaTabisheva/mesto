@@ -6,7 +6,7 @@
   padding: 0;
   cursor: pointer;
   border: none;
-  background-image: url(../../../images/AddButton.svg);
+  background-image: url(images/AddButton.svg);
 }
 
 
@@ -20,7 +20,7 @@
     align-items: center;
     justify-content: center;
     width: 282px;
-    background-image: url(../../../images/AddButton_mobile.svg);
+    background-image: url(images/AddButton_mobile.svg);
     margin: 0;
   }
 }

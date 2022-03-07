@@ -1,7 +1,8 @@
-import {Card} from './Card.js'
-import {FormValidator} from './FormValidator.js'
-import {openPopup, closePopup} from './utils.js'
-import {initialCards} from './initialCards.js'
+import {Card} from '../../src/components/Card'
+import {FormValidator} from '../../src/components/FormValidator.js'
+import {openPopup, closePopup} from '../../src/utils/utils'
+import {initialCards} from '../../src/utils/initialCards'
+import '../pages/index.css';
 
 
 const editModal = document.querySelector(".popup_type_edit");
