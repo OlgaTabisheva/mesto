@@ -1,7 +1,8 @@
-import {Card} from '../../src/components/Card'
-import {FormValidator} from '../../src/components/FormValidator.js'
-import {openPopup, closePopup} from '../../src/utils/utils'
-import {initialCards} from '../../src/utils/initialCards'
+import {Card} from '../../src/components/Card';
+import {FormValidator} from '../../src/components/FormValidator.js';
+import {openPopup, closePopup} from '../../src/utils/utils';
+import {initialCards} from '../../src/utils/initialCards';
+import  Section  from '../../src/components/Section.js';
 import '../index.css';
 
 
@@ -81,12 +82,12 @@ const cardsList = document.querySelector(".elements");
 const cardTemplateSelector = '.card-template'
 
 
-function renderCard(data) {
+/*function renderCard(data) {
   const card = new Card(data, cardTemplateSelector)
   const cardElement = card.createCard()
   cardsList.prepend(cardElement);
 
-}
+}*/
 
 
 const config = {
@@ -100,9 +101,20 @@ const config = {
 
 }
 
-initialCards.forEach(renderCard);
+//initialCards.forEach(defaultCardList);
+
 
 const editFormValidator = new FormValidator(config, editForm)
 const addCardFormValidator = new FormValidator(config, addCardForm)
 editFormValidator.enableValidation()
 addCardFormValidator.enableValidation()
+
+const defaultCardList = new Section({ items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, cardTemplateSelector)
+    const cardElement = card.createCard()
+    cardsList.prepend(cardElement);
+    console.log(card)
+  }, }, cardTemplateSelector);
+
+defaultCardList.render();
