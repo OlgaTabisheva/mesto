@@ -19,11 +19,12 @@ addCardForm.addEventListener('submit', (event) => {
   const nameValue = inputCardName.value;
   const linkValue = inputLink.value;
   addCardForm.reset();
-  renderCard({
+  createCard( nameValue, linkValue);
+  /*renderCard({
     name: nameValue,
     link: linkValue
 
-  })
+  })*/
   disableButton(addCardForm);
   closePopup(addCardModal);
 });
@@ -114,7 +115,18 @@ const defaultCardList = new Section({ items: initialCards,
     const card = new Card(item, cardTemplateSelector)
     const cardElement = card.createCard()
     cardsList.prepend(cardElement);
-    console.log(card)
-  }, }, cardTemplateSelector);
+  }, }, cardsList);
 
 defaultCardList.render();
+
+
+function createCard(nameValue,linkValue){
+  const card = new Card({
+    name: nameValue,
+    link: linkValue
+
+  }, cardTemplateSelector)
+  const cardElement = card.createCard()
+  defaultCardList.addItem(cardElement)
+
+}
