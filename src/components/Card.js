@@ -1,5 +1,5 @@
-import { viewCardModal, describePlace, describeLink} from '../../src/utils/utils'
-import {open} from '../../src/components/Popup'
+import { viewCardModal, describePlace, describeLink} from '../pages/index';
+import {open} from '../components/Popup'
 export class Card {
   constructor(data, cardTemplateSelector, handleCardClick) {
     this._data = data;
