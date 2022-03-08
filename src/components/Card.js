@@ -1,9 +1,10 @@
-import {openPopup, viewCardModal, describePlace, describeLink} from '../../src/utils/utils'
-
+import { viewCardModal, describePlace, describeLink} from '../../src/utils/utils'
+import {open} from '../../src/components/Popup'
 export class Card {
-  constructor(data, cardTemplateSelector) {
-    this._data = data
-    this._template= document.querySelector(cardTemplateSelector).content.querySelector('.element')
+  constructor(data, cardTemplateSelector, handleCardClick) {
+    this._data = data;
+    this._template= document.querySelector(cardTemplateSelector).content.querySelector('.element');
+    this._handleCardClick = handleCardClick;
 
   }
 
@@ -19,7 +20,7 @@ export class Card {
     _setEventListeners() {
     this._deleteButton.addEventListener("click",  () => this._deleteHandler()  )
     this._likeButton.addEventListener("click", this._likeClickHandler)
-    this._viewCardButton.addEventListener('click', () => this._openPopupImage(viewCardModal))
+    this._viewCardButton.addEventListener('click', () => this._handleCardClick(viewCardModal))
 
   }
 
