@@ -3,8 +3,8 @@ export class FormValidator {
     this._form = form
     this._settings = settings
     this._inputErrorClass = settings.inputErrorClass
-    this._errorVisibleClass =settings.errorVisibleClass
-    this._inactiveButtonClass =settings.inactiveButtonClass
+    this._errorVisibleClass = settings.errorVisibleClass
+    this._inactiveButtonClass = settings.inactiveButtonClass
     this._submitButton = form.querySelector(settings.buttonSelector)
     this._inputList = form.querySelectorAll(this._settings.inputSelector)
   }

@@ -1,9 +1,10 @@
-import { viewCardModal, describePlace, describeLink} from '../pages/index';
+import {viewCardModal, describePlace, describeLink} from '../pages/index';
 import {open} from '../components/Popup'
+
 export class Card {
   constructor(data, cardTemplateSelector, handleCardClick) {
     this._data = data;
-    this._template= document.querySelector(cardTemplateSelector).content.querySelector('.element');
+    this._template = document.querySelector(cardTemplateSelector).content.querySelector('.element');
     this._handleCardClick = handleCardClick;
 
   }
@@ -14,11 +15,13 @@ export class Card {
     describeLink.alt = this._data.name;
     openPopup(viewCardModal)
   }
+
   _deleteHandler() {
     this._cardElement.remove()
   }
-    _setEventListeners() {
-    this._deleteButton.addEventListener("click",  () => this._deleteHandler()  )
+
+  _setEventListeners() {
+    this._deleteButton.addEventListener("click", () => this._deleteHandler())
     this._likeButton.addEventListener("click", this._likeClickHandler)
     this._viewCardButton.addEventListener('click', () => this._handleCardClick(viewCardModal))
 
@@ -30,7 +33,7 @@ export class Card {
 
   createCard() {
 
-    this._element= this._template.querySelector('.element')
+    this._element = this._template.querySelector('.element')
 
     this._cardElement = this._template.cloneNode(true);
     this._cardImage = this._cardElement.querySelector('.element__image');
