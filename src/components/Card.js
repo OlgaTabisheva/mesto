@@ -1,4 +1,4 @@
-import {viewCardModal, describePlace, describeLink} from '../pages/index';
+import {viewCardModal, describePlace, describeLink} from '../utils/utils';
 import {open} from '../components/Popup'
 
 export class Card {
@@ -9,21 +9,15 @@ export class Card {
 
   }
 
-  _openPopupImage(viewCardModal) {
-    describePlace.textContent = this._cardTitle.textContent;
-    describeLink.src = this._cardImage.src;
-    describeLink.alt = this._data.name;
-    openPopup(viewCardModal)
-  }
-
   _deleteHandler() {
     this._cardElement.remove()
+    this._cardElement = null;
   }
 
   _setEventListeners() {
     this._deleteButton.addEventListener("click", () => this._deleteHandler())
     this._likeButton.addEventListener("click", this._likeClickHandler)
-    this._viewCardButton.addEventListener('click', () => this._handleCardClick(viewCardModal))
+    this._viewCardButton.addEventListener('click', () => this._handleCardClick())
 
   }
 
