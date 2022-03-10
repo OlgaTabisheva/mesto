@@ -1,9 +1,11 @@
 .error-message_visible{
-/*  color: red;
+  padding: 10px;
   opacity: 1;
   font-family: "Inter", 'Helvetica Neue', Arial, sans-serif;
   font-size: 12px;
   line-height: 14.52px;
-  font-weight: 400;*/
+  font-weight: 400;
+  display: block;
+  color: red;
 }
 

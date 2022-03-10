@@ -8,30 +8,6 @@ import PopupWithForm from '../components/PopupWithForm';
 import UserInfo from '../components/UserInfo';
 import {viewCardModal, describePlace, describeLink} from '../utils/utils';
 
-const editModal = document.querySelector(".popup_type_edit");
-const addCardModal = document.querySelector(".popup_type_add-card");
-const editProfileButton = document.querySelector('.profile__edit-button');
-const addCardButton = document.querySelector('.profile__add-button');
-const editForm = editModal.querySelector('.popup__form');
-const addCardForm = addCardModal.querySelector('.popup__form');
-
-
-
-function disableButton(form) {
-  const button = form.querySelector(".popup__button-save");
-  button.classList.add("popup__button-save_disabled")
-  button.setAttribute("disabled", '')
-}
-
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__job');
-
-//инпуты
-const inputName = document.querySelector('.popup__input_type_name');
-const inputJob = document.querySelector('.popup__input_type_job');
-const cardsList = document.querySelector(".elements");
-const cardTemplateSelector = '.card-template'
-
 const config = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
@@ -43,14 +19,25 @@ const config = {
 
 }
 
-//initialCards.forEach(defaultCardList);
+const editModal = document.querySelector(".popup_type_edit");
+const addCardModal = document.querySelector(".popup_type_add-card");
+const editProfileButton = document.querySelector('.profile__edit-button');
+const addCardButton = document.querySelector('.profile__add-button');
+const editForm = editModal.querySelector('.popup__form');
+const addCardForm = addCardModal.querySelector('.popup__form');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__job');
+const inputName = document.querySelector('.popup__input_type_name');
+const inputJob = document.querySelector('.popup__input_type_job');
+const cardsList = document.querySelector(".elements");
+const cardTemplateSelector = '.card-template'
 const imagePopup = new PopupWithImage(viewCardModal);
-imagePopup.setEventListeners();
-
 const userInfo = new UserInfo(profileName, profileJob);
 const info = userInfo.getUserInfo();
-inputName.value = info.name;
-inputJob.value = info.job;
+const editFormValidator = new FormValidator(config, editForm);
+const addCardFormValidator = new FormValidator(config, addCardForm);
+
+
 
 const editFormPopup = new PopupWithForm(editModal, (GetValues) => {
   const values = GetValues();
@@ -62,16 +49,8 @@ const addFormPopup = new PopupWithForm(addCardModal, (GetValues) => {
   const cardElement = createCard(values);
   defaultCardList.addItem(cardElement)
   addFormPopup.close();
+  addCardFormValidator.disableButton();
 });
-editFormPopup.setEventListeners();
-addFormPopup.setEventListeners();
-editProfileButton.addEventListener('click', () => editFormPopup.open())
-addCardButton.addEventListener('click', () => addFormPopup.open())
-
-const editFormValidator = new FormValidator(config, editForm)
-const addCardFormValidator = new FormValidator(config, addCardForm)
-editFormValidator.enableValidation()
-addCardFormValidator.enableValidation()
 
 const defaultCardList = new Section({
   items: initialCards,
@@ -80,6 +59,19 @@ const defaultCardList = new Section({
     defaultCardList.addItem(cardElement);
   },
 }, cardsList);
+
+imagePopup.setEventListeners();
+
+inputName.value = info.name;
+inputJob.value = info.job;
+
+editFormPopup.setEventListeners();
+addFormPopup.setEventListeners();
+editProfileButton.addEventListener('click', () => editFormPopup.open())
+addCardButton.addEventListener('click', () => addFormPopup.open())
+
+editFormValidator.enableValidation()
+addCardFormValidator.enableValidation()
 
 defaultCardList.render();
 

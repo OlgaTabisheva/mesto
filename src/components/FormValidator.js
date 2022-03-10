@@ -27,6 +27,7 @@ export class FormValidator {
     if (isFormValid) {
       this._submitButton.classList.remove(this._inactiveButtonClass)
       this._submitButton.removeAttribute("disabled")
+
     } else {
       this._submitButton.classList.add(this._inactiveButtonClass)
       this._submitButton.setAttribute("disabled", '')
@@ -46,6 +47,7 @@ export class FormValidator {
 
   _submitForm(event) {
     event.preventDefault();
+
   }
 
   enableValidation() {
@@ -56,8 +58,15 @@ export class FormValidator {
       });
     });
     this._toggleButton();
+    }
 
-  }
+    disableButton() {
+      const button =  this._form.querySelector(".popup__button-save");
+      button.classList.add("popup__button-save_disabled")
+      button.setAttribute("disabled", '')
+    }
+
+
 }
 
 
