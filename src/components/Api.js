@@ -2,7 +2,6 @@ class Api {
   constructor({baseUrl, headers}) {
     this._headers = headers
     this._baseUrl = baseUrl
-    // тело конструктора
   }
 
   getProfile() {
@@ -57,8 +56,24 @@ class Api {
       .then(res => res.ok ? res.json() : Promise.reject((res.status)))
       .catch(console.log)
   }
+  deleteLike(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+      .then(res => res.ok ? res.json() : Promise.reject((res.status)))
+      .catch(console.log)
+  }
 
-  // другие методы работы с API
+  addLike(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    })
+      .then(res => res.ok ? res.json() : Promise.reject((res.status)))
+      .catch(console.log)
+  }
+
 }
 
 export const api = new Api({

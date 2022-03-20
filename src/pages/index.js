@@ -140,7 +140,21 @@ function createCard(info) {
         })
 
     })
-  })
+  }, (id) => {
+    if (card.isLiked()){
+      api.deleteLike(id)
+        .then(res => {
+          card.setLikes(res.likes)
+        })
+    } else {
+      api.addLike(id)
+        .then(res => {
+          card.setLikes(res.likes)
+        })
+    }
+
+    }
+    )
   const cardElement = card.createCard();
   return cardElement;
 }

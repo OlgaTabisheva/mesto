@@ -11,9 +11,13 @@ export class Card {
     this._template = document.querySelector(cardTemplateSelector).content.querySelector('.element');
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
 
   }
-
+  isLiked(){
+    const userHasLikedCard = this._likes.find(user => user._id === this._userId)
+    return userHasLikedCard
+  }
   deleteCard() {
     this._cardElement.remove()
     this._cardElement = null;
@@ -21,20 +25,37 @@ export class Card {
 
   _setEventListeners() {
     this._deleteButton.addEventListener("click", () => this._handleDeleteClick(this._id))
-    this._likeButton.addEventListener("click", this._likeClickHandler)
+    this._likeButton.addEventListener("click", () => this._handleLikeClick(this._id))
     this._viewCardButton.addEventListener('click', () => this._handleCardClick())
 
   }
 
   _likeClickHandler() {
-    this.classList.toggle('element__group-heart_active');
+    const heart = this._cardElement.querySelector('.element__group-heart')
+      heart.classList.toggle('element__group-heart_active');
   }
-
-  _setLikes() {
+  setLikes(newLikes) {
+    this._likes = newLikes
     const LikeCountElement = this._cardElement.querySelector('.element__like-count')
     LikeCountElement.textContent = this._likes.length
+
+
+      if (this.isLiked()) {
+        this._fillLike()
+    } else{
+        this._emptyLike()
+      }
   }
 
+  _fillLike(){
+    const heart = this._cardElement.querySelector('.element__group-heart')
+    heart.classList.add('element__group-heart_active');
+  }
+
+  _emptyLike(){
+    const heart = this._cardElement.querySelector('.element__group-heart')
+    heart.classList.remove('element__group-heart_active');
+  }
   createCard() {
 
     this._element = this._template.querySelector('.element')
@@ -52,10 +73,11 @@ export class Card {
 
     this._setEventListeners()
     if (this._likes)
-      this._setLikes()
+      this.setLikes(this._likes)
     if (this._ownerId !== this._userId) {
       this._cardElement.querySelector('.element__delete-button').style.display = 'none'
     }
+
     return this._cardElement;
   }
 }
