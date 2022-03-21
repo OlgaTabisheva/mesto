@@ -6,9 +6,8 @@
 
 .profile__avatar-button:hover {
   opacity: 20%;
-  background-image: url(../../../images/Pan.svg)!important;
-  background-position: top;
-  background-repeat: no-repeat;
+
+
   background-size: auto;
   display: inline-block;
   z-index: 3;

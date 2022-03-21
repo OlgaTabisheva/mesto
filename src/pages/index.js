@@ -8,6 +8,7 @@ import PopupWithForm from '../components/PopupWithForm';
 import UserInfo from '../components/UserInfo';
 import {viewCardModal, describePlace, describeLink} from '../utils/utils';
 import {api} from '../components/Api'
+import changeButtonText from '../utils/utils'
 
 
 let userId
@@ -62,6 +63,7 @@ const profileAvatar = document.querySelector('.profile__avatar');
 const inputName = document.querySelector('.popup__input_type_name');
 const inputJob = document.querySelector('.popup__input_type_job');
 const cardsList = document.querySelector(".elements");
+const buttonselector = '.popup__button-save';
 const cardTemplateSelector = '.card-template'
 const imagePopup = new PopupWithImage(viewCardModal);
 const userInfo = new UserInfo(profileName, profileJob, profileAvatar);
@@ -71,14 +73,19 @@ const addCardFormValidator = new FormValidator(config, addCardForm);
 
 
 const editFormPopup = new PopupWithForm(editModal, (GetValues) => {
+  changeButtonText({isLoading: true, popup: editModal, buttonSelector: buttonselector});
   const info = GetValues();
-  //console.log('res',info)
   const name = info['input-name']
   const about = info['input-job']
+
   api.editProfile(name, about)
     .then(res => {
       console.log('res', name)
       userInfo.setUserInfo(name, about);
+    })
+    .finally(() => {
+      changeButtonText({isLoading: false, popup: editModal, buttonSelector: buttonselector});
+      editFormPopup.close();
     })
 
   editFormPopup.close();
@@ -102,8 +109,9 @@ const avatarPopup = new PopupWithForm(avatarCardModal, GetValues => {
   console.log(info)
   const link = info['input-link']
   api.editAvatar(link)
-  .then(res => {
-  userInfo.setUserInfo(res.name, res.about, res.avatar)})
+    .then(res => {
+      userInfo.setUserInfo(res.name, res.about, res.avatar)
+    })
 })
 
 conformPopup.setEventListeners();
@@ -136,40 +144,40 @@ defaultCardList.render();
 
 function createCard(info) {
   const card = new Card({
-    name: info['input-place'],
-    link: info['input-link'],
-    likes: info.likes,
-    id: info.id,
-    userId: userId,
-    ownerId: info['ownerId']
+      name: info['input-place'],
+      link: info['input-link'],
+      likes: info.likes,
+      id: info.id,
+      userId: userId,
+      ownerId: info['ownerId']
 
-  }, cardTemplateSelector, () => {
-    imagePopup.open(info['input-link'], info['input-place'])
-  }, (id) => {
-    conformPopup.open();
-    conformPopup.changeSubmitHandler(() => {
-      api.deleteCard(id)
-        .then(res => {
-          card.deleteCard();
-          conformPopup.close();
-        })
+    }, cardTemplateSelector, () => {
+      imagePopup.open(info['input-link'], info['input-place'])
+    }, (id) => {
+      conformPopup.open();
+      conformPopup.changeSubmitHandler(() => {
+        api.deleteCard(id)
+          .then(res => {
+            card.deleteCard();
+            conformPopup.close();
+          })
 
-    })
-  }, (id) => {
-    if (card.isLiked()){
-      api.deleteLike(id)
-        .then(res => {
-          card.setLikes(res.likes)
-        })
-    } else {
-      api.addLike(id)
-        .then(res => {
-          card.setLikes(res.likes)
-        })
+      })
+    }, (id) => {
+      if (card.isLiked()) {
+        api.deleteLike(id)
+          .then(res => {
+            card.setLikes(res.likes)
+          })
+      } else {
+        api.addLike(id)
+          .then(res => {
+            card.setLikes(res.likes)
+          })
+      }
+
     }
-
-    }
-    )
+  )
   const cardElement = card.createCard();
   return cardElement;
 }

@@ -7,7 +7,7 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    return {name: this._nameSelector.textContent, about: this._jobSelector.textContent/*, link: this._profileAvatarSelector.src*/};
+    return {name: this._nameSelector.textContent, about: this._jobSelector.textContent};
   }
 
   setUserInfo(name, about,avatar) {
