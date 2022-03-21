@@ -13,7 +13,7 @@ import {api} from '../components/Api'
 let userId
 api.getProfile()
   .then(res => {
-    userInfo.setUserInfo(res.name, res.about)
+    userInfo.setUserInfo(res.name, res.about, res.avatar)
 
     userId = res._id
   })
@@ -50,18 +50,21 @@ const config = {
 const editModal = document.querySelector(".popup_type_edit");
 const addCardModal = document.querySelector(".popup_type_add-card");
 const deleteCardModal = document.querySelector(".popup_type_delete-card");
+const avatarCardModal = document.querySelector(".popup_type_avatar");
 const editProfileButton = document.querySelector('.profile__edit-button');
+const avatarProfileButton = document.querySelector('.profile__avatar-button');
 const addCardButton = document.querySelector('.profile__add-button');
 const editForm = editModal.querySelector('.popup__form');
 const addCardForm = addCardModal.querySelector('.popup__form');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
+const profileAvatar = document.querySelector('.profile__avatar');
 const inputName = document.querySelector('.popup__input_type_name');
 const inputJob = document.querySelector('.popup__input_type_job');
 const cardsList = document.querySelector(".elements");
 const cardTemplateSelector = '.card-template'
 const imagePopup = new PopupWithImage(viewCardModal);
-const userInfo = new UserInfo(profileName, profileJob);
+const userInfo = new UserInfo(profileName, profileJob, profileAvatar);
 const info = userInfo.getUserInfo();
 const editFormValidator = new FormValidator(config, editForm);
 const addCardFormValidator = new FormValidator(config, addCardForm);
@@ -94,7 +97,17 @@ const addFormPopup = new PopupWithForm(addCardModal, GetValues => {
 });
 
 const conformPopup = new PopupWithForm(deleteCardModal)
+const avatarPopup = new PopupWithForm(avatarCardModal, GetValues => {
+  const info = GetValues();
+  console.log(info)
+  const link = info['input-link']
+  api.editAvatar(link)
+  .then(res => {
+  userInfo.setUserInfo(res.name, res.about, res.avatar)})
+})
+
 conformPopup.setEventListeners();
+avatarPopup.setEventListeners();
 
 const defaultCardList = new Section({
   items: [],
@@ -113,6 +126,8 @@ editFormPopup.setEventListeners();
 addFormPopup.setEventListeners();
 editProfileButton.addEventListener('click', () => editFormPopup.open())
 addCardButton.addEventListener('click', () => addFormPopup.open())
+avatarProfileButton.addEventListener('click', () => avatarPopup.open())
+
 
 editFormValidator.enableValidation()
 addCardFormValidator.enableValidation()
