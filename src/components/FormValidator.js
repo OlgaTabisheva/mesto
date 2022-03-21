@@ -15,7 +15,7 @@ export class FormValidator {
     errorContainer.textContent = input.validationMessage;
   }
 
-  _hideError(input, errorContainer,) {
+  _hideError(input, errorContainer) {
     input.classList.remove(this._inputErrorClass);
     errorContainer.classList.remove(this._errorVisibleClass);
     errorContainer.textContent = '';

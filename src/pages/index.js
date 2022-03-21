@@ -57,6 +57,7 @@ const avatarProfileButton = document.querySelector('.profile__avatar-button');
 const addCardButton = document.querySelector('.profile__add-button');
 const editForm = editModal.querySelector('.popup__form');
 const addCardForm = addCardModal.querySelector('.popup__form');
+const avatarCardForm = avatarCardModal.querySelector('.popup__form');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const profileAvatar = document.querySelector('.profile__avatar');
@@ -70,7 +71,7 @@ const userInfo = new UserInfo(profileName, profileJob, profileAvatar);
 const info = userInfo.getUserInfo();
 const editFormValidator = new FormValidator(config, editForm);
 const addCardFormValidator = new FormValidator(config, addCardForm);
-
+const avatarFormValidator = new FormValidator(config, avatarCardForm);
 
 const editFormPopup = new PopupWithForm(editModal, (GetValues) => {
   changeButtonText({isLoading: true, popup: editModal, buttonSelector: buttonselector});
@@ -106,12 +107,12 @@ const addFormPopup = new PopupWithForm(addCardModal, GetValues => {
 const conformPopup = new PopupWithForm(deleteCardModal)
 const avatarPopup = new PopupWithForm(avatarCardModal, GetValues => {
   const info = GetValues();
-  console.log(info)
   const link = info['input-link']
   api.editAvatar(link)
     .then(res => {
       userInfo.setUserInfo(res.name, res.about, res.avatar)
     })
+  avatarPopup.close();
 })
 
 conformPopup.setEventListeners();
@@ -139,6 +140,7 @@ avatarProfileButton.addEventListener('click', () => avatarPopup.open())
 
 editFormValidator.enableValidation()
 addCardFormValidator.enableValidation()
+avatarFormValidator.enableValidation()
 
 defaultCardList.render();
 
