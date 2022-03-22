@@ -79,7 +79,6 @@ const editFormPopup = new PopupWithForm(editModal, (info) => {
 
   api.editProfile(name, about)
     .then(res => {
-      console.log('res', name)
       userInfo.setUserInfo(name, about);
       editFormPopup.close();
     })
