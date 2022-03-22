@@ -17,11 +17,11 @@ api.getProfile()
     userInfo.setUserInfo(res.name, res.about, res.avatar)
 
     userId = res._id
-  })
+  }).catch(console.log)
 
 api.getInitialCards()
   .then(cardlist => {
-    cardlist.forEach(info => {
+    cardlist.reverse().forEach(info => {
       const card = createCard({
         'input-place': info['name'],
         'input-link': info['link'],
@@ -34,7 +34,7 @@ api.getInitialCards()
 
       defaultCardList.addItem(card)
     })
-  })
+  }).catch(console.log)
 
 
 const config = {
@@ -68,14 +68,13 @@ const buttonselector = '.popup__button-save';
 const cardTemplateSelector = '.card-template'
 const imagePopup = new PopupWithImage(viewCardModal);
 const userInfo = new UserInfo(profileName, profileJob, profileAvatar);
-const info = userInfo.getUserInfo();
+
 const editFormValidator = new FormValidator(config, editForm);
 const addCardFormValidator = new FormValidator(config, addCardForm);
 const avatarFormValidator = new FormValidator(config, avatarCardForm);
 
-const editFormPopup = new PopupWithForm(editModal, (GetValues) => {
+const editFormPopup = new PopupWithForm(editModal, (info) => {
   changeButtonText({isLoading: true, popup: editModal, buttonSelector: buttonselector});
-  const info = GetValues();
   const name = info['input-name']
   const about = info['input-job']
 
@@ -83,36 +82,47 @@ const editFormPopup = new PopupWithForm(editModal, (GetValues) => {
     .then(res => {
       console.log('res', name)
       userInfo.setUserInfo(name, about);
+      editFormPopup.close();
     })
+
     .finally(() => {
       changeButtonText({isLoading: false, popup: editModal, buttonSelector: buttonselector});
       editFormPopup.close();
     })
 
-  editFormPopup.close();
-});
-const addFormPopup = new PopupWithForm(addCardModal, GetValues => {
-  const values = GetValues();
 
+});
+const addFormPopup = new PopupWithForm(addCardModal, values => {
+  changeButtonText({isLoading: true, popup: addCardModal, buttonSelector: buttonselector});
   api.addCard(values['input-place'], values['input-link'])
     .then(res => {
       Object.assign(values, res)
+      const cardElement = createCard(values);
+      defaultCardList.addItem(cardElement);
+      addFormPopup.close();
+      addCardFormValidator.disableButton();
     })
-  const cardElement = createCard(values);
-  defaultCardList.addItem(cardElement)
-  addFormPopup.close();
-  addCardFormValidator.disableButton();
+    .finally(() => {
+      changeButtonText({isLoading: false, popup: addCardModal, buttonSelector: buttonselector});
+      editFormPopup.close();
+    })
+
 });
 
 const conformPopup = new PopupWithForm(deleteCardModal)
-const avatarPopup = new PopupWithForm(avatarCardModal, GetValues => {
-  const info = GetValues();
+const avatarPopup = new PopupWithForm(avatarCardModal, info => {
+  changeButtonText({isLoading: true, popup: avatarCardModal, buttonSelector: buttonselector});
   const link = info['input-link']
   api.editAvatar(link)
     .then(res => {
       userInfo.setUserInfo(res.name, res.about, res.avatar)
+      avatarPopup.close();
     })
-  avatarPopup.close();
+    .finally(() => {
+      changeButtonText({isLoading: false, popup: avatarCardModal, buttonSelector: buttonselector});
+      editFormPopup.close();
+    })
+
 })
 
 conformPopup.setEventListeners();
@@ -128,12 +138,16 @@ const defaultCardList = new Section({
 
 imagePopup.setEventListeners();
 
-inputName.value = info.name;
-inputJob.value = info.about;
+
 
 editFormPopup.setEventListeners();
 addFormPopup.setEventListeners();
-editProfileButton.addEventListener('click', () => editFormPopup.open())
+editProfileButton.addEventListener('click', () => {
+  const info = userInfo.getUserInfo();
+  inputName.value = info.name;
+  inputJob.value = info.about;
+  editFormPopup.open()})
+
 addCardButton.addEventListener('click', () => addFormPopup.open())
 avatarProfileButton.addEventListener('click', () => avatarPopup.open())
 
@@ -149,9 +163,9 @@ function createCard(info) {
       name: info['input-place'],
       link: info['input-link'],
       likes: info.likes,
-      id: info.id,
-      userId: userId,
-      ownerId: info['ownerId']
+      id: info.id ? info.id : info._id,
+      userId: info.userId ? info.userId : info.owner._id,
+      ownerId: info.ownerId ? info.ownerId: info.owner._id
 
     }, cardTemplateSelector, () => {
       imagePopup.open(info['input-link'], info['input-place'])
@@ -162,7 +176,7 @@ function createCard(info) {
           .then(res => {
             card.deleteCard();
             conformPopup.close();
-          })
+          }).catch(console.log)
 
       })
     }, (id) => {
@@ -170,12 +184,12 @@ function createCard(info) {
         api.deleteLike(id)
           .then(res => {
             card.setLikes(res.likes)
-          })
+          }).catch(console.log)
       } else {
         api.addLike(id)
           .then(res => {
             card.setLikes(res.likes)
-          })
+          }).catch(console.log)
       }
 
     }

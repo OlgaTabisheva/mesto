@@ -56,9 +56,9 @@
     <button type="button" class="popup__close"></button>
     <form id="form__input" name="profileInputForm" class="popup__form" novalidate>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input id="name" name="input-name" type="text" class="popup__input popup__input_type_name" minlength="2" maxlength="40" required>
+      <input placeholder="Введите имя пользователя" id="name" name="input-name" type="text" class="popup__input popup__input_type_name" minlength="2" maxlength="40" required>
       <span id="error-name" class="error-message error-message_visible"></span>
-      <input id="job" name="input-job" type="text" class="popup__input popup__input_type_job" minlength="2" maxlength="200" required>
+      <input placeholder="Введите профессию" id="job" name="input-job" type="text" class="popup__input popup__input_type_job" minlength="2" maxlength="200" required>
       <span id="error-job" class="error-message error-message_visible"></span>
       <button class="popup__button-save"  type="submit">Сохранить</button>
     </form>
@@ -101,8 +101,10 @@
     <button class="element__view-button"><img class="element__image" alt="Карточка с изображением места"></button>
     <div class="element__group">
       <h2 class="element__group-title"></h2>
-      <button type="button" class="element__group-heart"></button>
-      <span type="button" class="element__like-count"></span>
+      <div class="buttons">
+        <button type="button" class="element__group-heart"></button>
+        <span type="button" class="element__like-count"></span>
+      </div>
     </div>
   </article>
 </template>

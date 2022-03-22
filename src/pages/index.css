@@ -43,3 +43,5 @@
 @import url(../blocks/error-message/_visible/error-message_visible.css);
 @import url(../blocks/profile/__avatar-button/__avatar-button.css);
 @import url(../blocks/avatar/avatar.css);
+@import url(../blocks/element/__like-count/element__like-count.css);
+@import url(../blocks/buttons/buttons.css);

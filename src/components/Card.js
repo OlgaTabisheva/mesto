@@ -35,16 +35,23 @@ export class Card {
       heart.classList.toggle('element__group-heart_active');
   }
   setLikes(newLikes) {
-    this._likes = newLikes
-    const LikeCountElement = this._cardElement.querySelector('.element__like-count')
-    LikeCountElement.textContent = this._likes.length
 
+    const likeCountElement = this._cardElement.querySelector('.element__like-count')
+    if (newLikes) {
+      this._likes = newLikes
+      likeCountElement.textContent = this._likes.length
 
       if (this.isLiked()) {
         this._fillLike()
-    } else{
+      } else {
         this._emptyLike()
       }
+    }
+    else
+    {
+      likeCountElement.textContent = 0
+    this._emptyLike();
+    }
   }
 
   _fillLike(){
@@ -72,9 +79,8 @@ export class Card {
     this._likeButton = this._cardElement.querySelector('.element__group-heart');
 
     this._setEventListeners()
-    if (this._likes)
-      this.setLikes(this._likes)
-    if (this._ownerId !== this._userId) {
+    this.setLikes(this._likes)
+    if (this._ownerId && this._ownerId !== this._userId) {
       this._cardElement.querySelector('.element__delete-button').style.display = 'none'
     }
 

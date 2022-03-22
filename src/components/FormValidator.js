@@ -61,9 +61,8 @@ export class FormValidator {
     }
 
     disableButton() {
-      const button =  this._form.querySelector(".popup__button-save");
-      button.classList.add("popup__button-save_disabled")
-      button.setAttribute("disabled", '')
+      this._submitButton.classList.add("popup__button-save_disabled")
+      this._submitButton.setAttribute("disabled", '')
     }
 
 

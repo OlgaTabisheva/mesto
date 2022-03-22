@@ -9,8 +9,8 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject((res.status)))
-      .catch(console.log)
+      .then(res => this._getResponseData(res))
+
   }
 
 
@@ -18,8 +18,8 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject((res.status)))
-      .catch(console.log)
+      .then(res => this._getResponseData(res))
+
   }
 
   editProfile(name, about) {
@@ -31,8 +31,8 @@ class Api {
         about
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject((res.status)))
-      .catch(console.log)
+      .then(res => this._getResponseData(res))
+
   }
 
   addCard(name, link) {
@@ -44,8 +44,8 @@ class Api {
         link
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject((res.status)))
-      .catch(console.log)
+      .then(res => this._getResponseData(res))
+
   }
 
   deleteCard(id) {
@@ -53,16 +53,16 @@ class Api {
       method: "DELETE",
       headers: this._headers,
     })
-      .then(res => res.ok ? res.json() : Promise.reject((res.status)))
-      .catch(console.log)
+      .then(res => this._getResponseData(res))
+
   }
   deleteLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
       headers: this._headers,
     })
-      .then(res => res.ok ? res.json() : Promise.reject((res.status)))
-      .catch(console.log)
+      .then(res => this._getResponseData(res))
+
   }
 
   addLike(id) {
@@ -70,9 +70,17 @@ class Api {
       method: "PUT",
       headers: this._headers,
     })
-      .then(res => res.ok ? res.json() : Promise.reject((res.status)))
-      .catch(console.log)
+      .then(res => this._getResponseData(res))
+
   }
+
+  _getResponseData(res) {
+    if (!res.ok) {
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }
+    return res.json();
+  }
+
   editAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
@@ -81,8 +89,8 @@ class Api {
         avatar
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject((res.status)))
-      .catch(console.log)
+      .then( res => this._getResponseData(res))
+
   }
 }
 
@@ -93,3 +101,4 @@ export const api = new Api({
     'Content-Type': 'application/json'
   }
 });
+
