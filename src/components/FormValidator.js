@@ -20,6 +20,10 @@ export class FormValidator {
     errorContainer.classList.remove(this._errorVisibleClass);
     errorContainer.textContent = '';
   }
+  disableButton() {
+    this._submitButton.classList.add(this._inactiveButtonClass);
+    this._submitButton.setAttribute("disabled", '');
+  }
 
   _toggleButton() {
     const isFormValid = this._form.checkValidity();
@@ -29,10 +33,8 @@ export class FormValidator {
       this._submitButton.removeAttribute("disabled")
 
     } else {
-      this._submitButton.classList.add(this._inactiveButtonClass)
-      this._submitButton.setAttribute("disabled", '')
+      this.disableButton();
     }
-
   }
 
   _validateInput(input) {

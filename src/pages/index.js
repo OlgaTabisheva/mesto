@@ -85,7 +85,6 @@ const editFormPopup = new PopupWithForm(editModal, (info) => {
 
     .finally(() => {
       changeButtonText({isLoading: false, popup: editModal, buttonSelector: buttonselector});
-      editFormPopup.close();
     })
 
 
@@ -102,7 +101,6 @@ const addFormPopup = new PopupWithForm(addCardModal, values => {
     })
     .finally(() => {
       changeButtonText({isLoading: false, popup: addCardModal, buttonSelector: buttonselector});
-      editFormPopup.close();
     })
 
 });
@@ -118,7 +116,6 @@ const avatarPopup = new PopupWithForm(avatarCardModal, info => {
     })
     .finally(() => {
       changeButtonText({isLoading: false, popup: avatarCardModal, buttonSelector: buttonselector});
-      editFormPopup.close();
     })
 
 })
