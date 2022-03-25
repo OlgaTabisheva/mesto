@@ -62,10 +62,6 @@ export class FormValidator {
     this._toggleButton();
     }
 
-    disableButton() {
-      this._submitButton.classList.add("popup__button-save_disabled")
-      this._submitButton.setAttribute("disabled", '')
-    }
 
 
 }
